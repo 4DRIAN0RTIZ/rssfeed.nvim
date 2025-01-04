@@ -8,6 +8,8 @@
 =======================
 ```
 
+![RSSFeedPreview](./assets/PreviewRSS.gif)
+
 ## Introduction
 
 `rssfeed.nvim` is a Neovim plugin that allows you to fetch and display RSS feeds directly within Neovim. This plugin provides an easy way to stay updated with your favorite blogs and news sources without leaving your editor.
