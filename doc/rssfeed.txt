@@ -1,0 +1,89 @@
+*rssfeed.txt*	RSSFeed Plugin Documentation
+
+==============================================================================
+RSSFeed Plugin Documentation                               *rssfeed*
+
+INTRODUCTION                                              *rssfeed-intro*
+
+The RSSFeed plugin allows you to fetch and display RSS feeds directly in Neovim.
+This document provides information on the tags and their usage within the plugin.
+
+==============================================================================
+TAGS                                                     *rssfeed-tags*
+
+                                                        *rssfeed-open_cmd*
+open_cmd
+        Specifies the command used to open links.
+        Type: String
+        Default: "xdg-open"
+>
+        require('rssfeed').setup({
+            open_cmd = "wslview"
+        })
+<
+                                                        *rssfeed-feeds*
+feeds
+        Specifies the RSS feeds to fetch.
+        Type: Table
+        Default: {
+            { name = "Dotfyle", url = "https://dotfyle.com/neovim/plugins/rss.xml" }
+        }
+>
+        require('rssfeed').setup({
+            feeds = {
+                { name = "Dotfyle", url = "https://dotfyle.com/neovim/plugins/rss.xml" },
+                { name = "TechCrunch", url = "https://techcrunch.com/feed/" },
+            }
+        })
+<
+                                                        *rssfeed-get_rss_feed()*
+get_rss_feed({url})
+        Fetches the RSS feed from the specified URL.
+        Parameters:
+            {url}   The URL of the RSS feed.
+>
+        local rss_feed = require('rssfeed')
+        local feed = rss_feed.get_rss_feed("https://dotfyle.com/neovim/plugins/rss.xml")
+<
+                                                        *rssfeed-select_feed()*
+select_feed()
+        Opens a Telescope picker to select an RSS feed from the configured feeds.
+>
+        require('rssfeed').select_feed()
+<
+==============================================================================
+INSTALLATION                                            *rssfeed-installation*
+
+For installation, you can use any of the following package managers:
+
+Vim-Plug: >
+        Plug '4DRIAN0RTIZ/rssfeed.nvim'
+<
+Packer: >
+        use '4DRIAN0RTIZ/rssfeed.nvim'
+<
+Setup ~
+
+To configure the plugin, call the setup function with your desired options: >
+        require('rssfeed').setup({
+            open_cmd = "wslview",
+            feeds = {
+                { name = "Dotfyle", url = "https://dotfyle.com/neovim/plugins/rss.xml" }
+            }
+        })
+<
+==============================================================================
+USAGE                                                   *rssfeed-usage*
+
+To open the RSS feed picker, run the following command: >
+        :RSSFeed
+<
+Key Mappings ~
+
+You can set up custom key mappings to use the plugin functionalities: >
+        nnoremap <leader>rss :lua require('rssfeed').select_feed()<CR>
+<
+==============================================================================
+LICENSE                                                 *rssfeed-license*
+
+MIT License
