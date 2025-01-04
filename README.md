@@ -26,7 +26,7 @@
 Add the following to your `init.vim` or `init.lua`:
 
 ```vim
-Plug '4DRIAN0RTIZ/rssfeed.nvim"
+Plug "4DRIAN0RTIZ/rssfeed.nvim"
 ```
 
 Then, install the plugin whith:
