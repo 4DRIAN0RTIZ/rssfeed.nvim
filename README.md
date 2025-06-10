@@ -20,6 +20,7 @@
 - Open links in your default browser.
 - Integration with Telescope for selecting feeds.
 - Customizable feed list.
+- Enhanced interface built with [nui.nvim](https://github.com/MunifTanjim/nui.nvim).
 
 ## Installation
 
@@ -28,6 +29,7 @@
 Add the following to your `init.vim` or `init.lua`:
 
 ```vim
+Plug "MunifTanjim/nui.nvim"
 Plug "4DRIAN0RTIZ/rssfeed.nvim"
 ```
 
@@ -40,7 +42,10 @@ Then, install the plugin whith:
 ### Using Packer
 
 ```lua
-use "4DRIAN0RTIZ/rssfeed.nvim"
+use {
+    "4DRIAN0RTIZ/rssfeed.nvim",
+    requires = "MunifTanjim/nui.nvim",
+}
 ```
 
 Then, install with:
