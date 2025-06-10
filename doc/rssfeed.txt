@@ -57,10 +57,14 @@ INSTALLATION                                            *rssfeed-installation*
 For installation, you can use any of the following package managers:
 
 Vim-Plug: >
+        Plug 'MunifTanjim/nui.nvim'
         Plug '4DRIAN0RTIZ/rssfeed.nvim'
 <
 Packer: >
-        use '4DRIAN0RTIZ/rssfeed.nvim'
+        use {
+            '4DRIAN0RTIZ/rssfeed.nvim',
+            requires = 'MunifTanjim/nui.nvim',
+        }
 <
 Setup ~
 

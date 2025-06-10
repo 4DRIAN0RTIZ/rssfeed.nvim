@@ -1,13 +1,34 @@
 local ui = {}
 local config = require("rssfeed.config")
+local Popup = require("nui.popup")
+local event = require("nui.utils.autocmd").event
 
 local line_to_link = {}
 
 function ui.display_in_floating_window(entries)
-    local buf = vim.api.nvim_create_buf(false, true)
-    vim.api.nvim_buf_set_option(buf, "modifiable", true)
-
     line_to_link = {}
+
+    local width = math.floor(vim.o.columns * 0.8)
+    local height = math.floor(vim.o.lines * 0.8)
+
+    local popup = Popup({
+        enter = true,
+        focusable = true,
+        border = {
+            style = "rounded",
+        },
+        relative = "editor",
+        position = "50%",
+        size = {
+            width = width,
+            height = height,
+        },
+    })
+
+    popup:mount()
+
+    local buf = popup.bufnr
+    vim.api.nvim_buf_set_option(buf, "modifiable", true)
 
     local lines = {}
     local line_num = 1
@@ -27,23 +48,17 @@ function ui.display_in_floating_window(entries)
     vim.api.nvim_buf_set_lines(buf, 0, -1, false, lines)
     vim.api.nvim_buf_set_option(buf, "modifiable", false)
 
-    vim.api.nvim_buf_set_keymap(buf, "n", "q", "<cmd>close<CR>", { noremap = true, silent = true })
-    vim.api.nvim_buf_set_keymap(buf, "n", "<CR>", "<cmd>lua require('rssfeed.ui').open_line()<CR>", { noremap = true, silent = true })
+    vim.keymap.set("n", "q", function()
+        popup:unmount()
+    end, { buffer = buf, noremap = true, silent = true })
 
-    local width = math.floor(vim.o.columns * 0.8)
-    local height = math.floor(vim.o.lines * 0.8)
-    local row = math.floor((vim.o.lines - height) / 2)
-    local col = math.floor((vim.o.columns - width) / 2)
+    vim.keymap.set("n", "<CR>", function()
+        ui.open_line()
+    end, { buffer = buf, noremap = true, silent = true })
 
-    vim.api.nvim_open_win(buf, true, {
-        relative = "editor",
-        width = width,
-        height = height,
-        row = row,
-        col = col,
-        style = "minimal",
-        border = "rounded",
-    })
+    popup:on(event.BufLeave, function()
+        popup:unmount()
+    end)
 end
 
 function ui.open_link(link)
