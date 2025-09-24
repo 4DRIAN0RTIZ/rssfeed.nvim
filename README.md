@@ -45,6 +45,12 @@
 },
 ```
 
+Then, install the plugin with
+
+```vim
+:Lazy install
+```
+
 ### Using `vim-plug`
 
 Add the following to your `init.vim` or `init.lua`:
