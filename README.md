@@ -24,6 +24,27 @@
 
 ## Installation
 
+### Using lazy.nvim
+
+```lua
+{
+  "4DRIAN0RTIZ/rssfeed.nvim",
+  dependencies = {
+    "MunifTanjim/nui.nvim",
+  },
+  cmd = "RSSFeed",
+  config = function ()
+    require('rssfeed').setup({
+      open_cmd = "wslview",
+      feeds = {
+        -- Add your RSS feeds here
+        { name = "RSS Feed", url = "https://website.com/blog/rss.xml" },
+      }
+    })
+  end
+},
+```
+
 ### Using `vim-plug`
 
 Add the following to your `init.vim` or `init.lua`:
